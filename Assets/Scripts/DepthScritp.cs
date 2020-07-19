@@ -10,6 +10,9 @@ public class DepthScritp : MonoBehaviour
     public int speed;
     public int speedF;
     public DepthOfField dptf;
+    public GameObject Staranim;
+    public GameObject PlayerStart;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +22,18 @@ public class DepthScritp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("start"))
+        {
+            // Avoid any reload.
+            Debug.Log("yes");
+        }
         Volume volume = post_processing_Script.GetComponent<Volume>();
         DepthOfField tmp;
         if(volume.profile.TryGet<DepthOfField>(out tmp))
         {
             dptf = tmp;
             speedF++;
-            if(speedF % 12 == 0)
+            if(speedF % 22 == 0)
             {
                 speed++;
             }
@@ -35,6 +42,8 @@ public class DepthScritp : MonoBehaviour
         if(dptf.aperture.value == dptf.aperture.max)
         {
             Destroy(gameObject.GetComponent<DepthScritp>());
+            Staranim.SetActive(false);
+            PlayerStart.SetActive(true);
         }    
     }
 }
