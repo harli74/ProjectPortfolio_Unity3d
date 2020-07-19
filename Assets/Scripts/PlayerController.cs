@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour
 
     public Transform Player;
     public float speed;
+    public GameObject StartPanel;
     void Start()
     {
+        StartPanel.SetActive(true);
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
@@ -44,4 +46,5 @@ public class PlayerController : MonoBehaviour
             Player.Translate(Vector3.back * speed * Time.deltaTime);
         }
     }
+    
 }
